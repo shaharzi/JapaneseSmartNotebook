@@ -14,10 +14,11 @@
 
 ## דרישות
 
-- .NET 10 SDK
+- Node.js 18+
+- Netlify CLI (`npm install -g netlify-cli`)
 - מפתח OpenAI API פעיל (עם יתרת חיוב בפלטפורמת ה-API, בנפרד ממנוי ChatGPT)
 
-## הפעלה
+## הפעלה מקומית
 
 ### Windows (PowerShell)
 
@@ -31,9 +32,13 @@ run.ps1
 run.cmd
 ```
 
-שתי הסקריפטים מבקשים הדבקת OpenAI API key, מגדירים ברירת מחדל למודל (`gpt-5-mini`) אם `OPENAI_MODEL` לא הוגדר, ומריצים `dotnet run`. המפתח אינו נשמר לקובץ.
+שתי הסקריפטים מבקשים הדבקת OpenAI API key, מגדירים ברירת מחדל למודל (`gpt-5-mini`) אם `OPENAI_MODEL` לא הוגדר, ומריצים `netlify dev`. המפתח אינו נשמר לקובץ.
 
 לאחר ההפעלה, פתחו את הכתובת שמוצגת במסוף. במסך "ניתוח AI", מומלץ ללחוץ תחילה על "בדיקת חיבור".
+
+## פריסה ל-Netlify
+
+חברו את המאגר ל-Netlify (Import from Git), והגדירו את משתני הסביבה `OPENAI_API_KEY` (ו-`OPENAI_MODEL` אם רוצים לשנות ברירת מחדל) תחת Site settings → Environment variables. `netlify.toml` כבר מגדיר את תיקיית הפרסום (`wwwroot`) ואת תיקיית הפונקציות (`netlify/functions`).
 
 ## חשוב
 
@@ -48,6 +53,7 @@ run.cmd
 
 ## מבנה הפרויקט
 
-- `Program.cs` — שרת ASP.NET Core Minimal API: משרת קבצים סטטיים ומבצע קריאות ל-OpenAI מהשרת בלבד (המפתח אינו נחשף לדפדפן)
-- `wwwroot/index.html` — כל הממשק: חיפוש, אוצר מילים, טופס הוספה ידנית ומסך ניתוח AI
-- `run.ps1` / `run.cmd` — סקריפטים להפעלה מקומית ב-Windows
+- `netlify/functions/` — פונקציות Netlify ב-TypeScript (`status.ts`, `check.ts`, `analyze.ts`) שמבצעות את כל הקריאות ל-OpenAI מהשרת בלבד (המפתח אינו נחשף לדפדפן)
+- `netlify.toml` — הגדרות פרסום, כולל הפניית `/api/*` לפונקציות
+- `wwwroot/index.html`, `style.css`, `app.js` — הממשק: חיפוש, אוצר מילים, טופס הוספה ידנית ומסך ניתוח AI
+- `run.ps1` / `run.cmd` — סקריפטים להפעלה מקומית ב-Windows (מריצים `netlify dev`)

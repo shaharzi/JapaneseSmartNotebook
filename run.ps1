@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 Write-Host ""
-Write-Host "Japanese Smart Notebook v5" -ForegroundColor Magenta
+Write-Host "Japanese Smart Notebook" -ForegroundColor Magenta
 Write-Host "The API key will not be saved to a file." -ForegroundColor DarkGray
 Write-Host ""
 
@@ -15,7 +15,7 @@ try {
         $env:OPENAI_MODEL = "gpt-5-mini"
     }
 
-    dotnet run
+    netlify dev
 }
 finally {
     [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr)

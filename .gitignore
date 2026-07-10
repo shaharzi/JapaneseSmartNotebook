@@ -1,8 +1,6 @@
-bin/
-obj/
+node_modules/
+.netlify/
 .vs/
 .idea/
 *.user
-*.suo
 .env
-appsettings.*.json

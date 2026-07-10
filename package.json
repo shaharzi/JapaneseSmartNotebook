@@ -1,0 +1,13 @@
+{
+  "name": "japanese-smart-notebook",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "@netlify/functions": "^2.8.1",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

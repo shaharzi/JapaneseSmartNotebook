@@ -10,7 +10,7 @@ set /p OPENAI_API_KEY=Paste OpenAI API key:
 
 if "%OPENAI_MODEL%"=="" set OPENAI_MODEL=gpt-5-mini
 
-dotnet run
+netlify dev
 
 set OPENAI_API_KEY=
 endlocal
